@@ -3,18 +3,15 @@ BITS 16
 ;; Meg Ryan
 ;; Jan 22nd, 2017
 
-
-; purpose of the prelude: set up the data and stack segments for waking up the operating system
-; binary file will be 512 bytes long bc bootloaders will all be 512 bytes
-
-
 start:
-        cli             ; turn off interrupts for the prelude
+		;; PRELUDE  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+        cli ; turn off interrupts for the prelude
 			; if interrupts are on, a hardware device
 			; could alter a register and prevent the
 			; computer from booting any further
 
-        mov ax, 07C0h   ; this moves the number 07c0h (where the bootloader starts) into the ax register,
+        mov ax, 07C0h  	; this moves the number 07c0h (where the bootloader starts) into the ax register,
         				; starting the program at the address 07c0h
         mov ds, ax      ; this copies the contents of ax into ds,
         				; putting the start of the data segment (ds) at segment 07c0h
@@ -29,14 +26,20 @@ start:
 
         sti             ; turn the interrupts back on
 
+		;; BEGINNING OF DAILY 2 ASSIGNMENT ;;;;;;;;;;;;;;;;;;;;;;;
+		; reference https://en.wikipedia.org/wiki/BIOS_interrupt_call
 
-		;talking abuot functions, reference https://en.wikipedia.org/wiki/BIOS_interrupt_call
+		; print 'C'
 		mov ah, 0Eh ; sets function code to teletype mode according to table for ah=0eh
 		mov al, 43h ; al is char register, 43h is ASCII for 'C'
 		mov bh, 0h	; bh is page number, which we want to be 0
 		int 10h		; issue interrupt
+
+		; print 'D'
 		mov al, 44h ; adds a D after the C
-		int 10h ; int is a (BiOS?) *software interrupt*: tells cpu to stop and go do something else (whatever is at 10h)
+		int 10h ; int is a (BIOS) *software interrupt*: tells cpu to stop and go do something else (whatever is at 10h)
+				; *interrupt vector table*: cpu looks here and sees 10h is the *interrupt vector*
+
 
 		mov si, thestring	; point the register si to the string we want to print
 		call print			; call instruction causing the CPU to execute instructions
@@ -54,18 +57,21 @@ start:
 		; loop until we receive null byte
 		loop:
 			; load byte from DS:SI into the a register
-			
+			lodsb 			; copies a byte in mem at address DS:SI into al register
 			; check if that register is null or not
-
+			cmp al, 0h		; sets status flag ZF to 1 if values are equal, otherwise sets ZF to 0
 			; if null, jump to exit label. else, issue interrupt 10h to print it, then go back to loop label
-
+			je .loopexit	; jumps to .loopexit if at register is null
+			int 10h			; issue interrupt to print it
+			jmp loop
+		.loopexit:
 		ret ; ret is CPU instruction for 'return'
 	; end of procedure print
 	;; END OF PROCEDURE AREA ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 	;; START OF DATA AREA ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	the string db 'mcduck', 0 ; thestring is name for area of mem defined by db
+	thestring db 'mcduck', 0 ; thestring is name for area of mem defined by db
 								; recall db="define byte" to nasm assembler, not CPU
 	;; END OF DATA AREA ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
