@@ -35,7 +35,7 @@ length:
 .loop1:
 	lodsb
 	cmp al, 0h ; check if each char is a 0
-	je .exit1:
+	je .exit1
 	inc dh		; dh is arbitrary, just picked a reg that we werent using
 				; dh will eventually equal the length of the string
 	jmp .loop1
