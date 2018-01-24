@@ -31,7 +31,7 @@ start:
 
 ;; PROCEDURE AREA - LENGTH FUNCTION ;;;;;;;;;;
 length:
-	mov df, o
+	mov dl, o
 .loop1:
 	lodsb
 	cmp al, 0h ; check if each char is a 0
