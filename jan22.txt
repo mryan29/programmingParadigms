@@ -26,7 +26,7 @@ start:
 
 	mov cx, ss
 	mov es, cx ; sets heap in same area as stack, uses ss as es
-	mov si, 0h ; sets offset to 0 bc want to start at top of ss and grow downwards
+	mov si, 0h ; sets offset to 0 bc want to start at top of ss and grow downwardss
 	mov al 44h
 	stosb
 
