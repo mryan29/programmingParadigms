@@ -31,7 +31,7 @@ start:
 
 		move si, thestring ; remember si is source index
 						; takes whereever this location is and takes that mem address of thestring and puts that addr into 
-						; si reguister
+https://piazza.com/class_profile/get_resource/jbxmh2ysv2e70z/jcmc53n0711ej						; si reguister
 		lodsb ; load stored byte: copies from mem lctn ds:si (segment:offset) offset from strt of location set in prelude
 		lodsb ; should display C, one before this should display m
 
