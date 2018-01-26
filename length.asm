@@ -41,7 +41,6 @@ length:
 	jmp .loop1
 .exit1:
 	ret
-	
 
 	msg db 'hello', 0	; define string with a null byte at the end
 
