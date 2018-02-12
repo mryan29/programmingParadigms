@@ -1,6 +1,6 @@
 ;; scheme daily homework 2
 ;; name: Meg Ryan
-;; date: Feb 5th, 2018
+;; date: Feb 5th, 2017
 
 ;; the test lists
 ;; notice they have a ' in front of the lists; that tells the interpreter to read
@@ -12,7 +12,10 @@
 ;; replacefirst
 (define replacefirst
   (lambda (a b lat)
-    '()))
+    (cond
+    	((null? lat) '())
+    	((eq? a (car lat)) (cons b (cdr lat)))
+    	(else (cons (car lat)(replacefirst a b(cdr lat)))))))
     ;; right now replacefirst always returns an empty list
     ;; make it return a lat with the first instance of a replaced with b
     ;; see the tests and example output below...
