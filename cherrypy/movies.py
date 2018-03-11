@@ -17,18 +17,18 @@ class MovieController(object):
                 movie['title'] = self.mdb.movies[mid]['title']
                 movie['id'] = mid
                 output['movies'].append(movie)
-            output['result'] = 'success'
+            output['result'] = 'Success'
         else:
             key = int(key)
             movie = self.mdb.get_movie(key)
             if movie is None:
-                output['result'] = 'error'
-                output['message'] = 'key not found'
+                output['result'] = 'Error'
+                output['message'] = 'Key not found'
             else:
                 output['genres'] = movie['genres']
                 output['title'] = movie['title']
                 output['id'] = key
-                output['result'] = 'success'
+                output['result'] = 'Success'
                 output['img'] = self.mdb.get_image(key)
         return json.dumps(output)
 
@@ -42,10 +42,10 @@ class MovieController(object):
             info['title'] = user_input['title']
             info['genres'] = user_input['genres']
             self.mdb.set_movie(key, info)
-            output['result'] = 'success'
+            output['result'] = 'Success'
         except KeyError:
-            output['result'] = 'error'
-            output['message'] = 'invalid input'
+            output['result'] = 'Error'
+            output['message'] = 'Invalid input'
         return json.dumps(output)
 
     def POST(self):
@@ -58,24 +58,24 @@ class MovieController(object):
             info['genres'] = user_input['genres']
             mid = self.mdb.get_unused_key("movies")
             self.mdb.set_movie(mid, info)
-            output['result'] = 'success'
+            output['result'] = 'Success'
             output['id'] = mid
         except KeyError:
-            output['result'] = 'error'
-            output['message'] = 'invalid input'
+            output['result'] = 'Error'
+            output['message'] = 'Invalid input'
         return json.dumps(output)
 
     def DELETE(self, key = None):
         output = {}
         if key is None:
             self.mdb.movies = {}
-            output['result'] = 'success'
+            output['result'] = 'Success'
         else:
             key = int(key)
             try:
                 del self.mdb.movies[key]
-                output['result'] = 'success'
+                output['result'] = 'Success'
             except KeyError:
-                output['result'] = 'error'
-                output['message'] = 'key not found'
+                output['result'] = 'Error'
+                output['message'] = 'Key not found'
         return json.dumps(output)

@@ -18,11 +18,11 @@ class _movie_database(object):
 				mName = components[1]
 				mGenres = components[2]
 				
-				self.movies[mid] = {'name': mName, 'genres': mGenres}
+				self.movies[mid] = {'title': mName, 'genres': mGenres}
 	
 	def get_movie(self, mID):		# returns list w 2 elmnts (mName, mGenre) || none
 		if mID in self.movies:
-			return [self.movies[mID]['name'], self.movies[mID]['genres']]
+			return [self.movies[mID]['title'], self.movies[mID]['genres']]
 		else:
 			return None
 		
@@ -33,7 +33,7 @@ class _movie_database(object):
 		return mIDList
 	
 	def set_movie(self, mID, info):	# updates movie data entry w mID or creates new one
-		self.movies[mID] = {'name':info[0], 'genres':info[1]}	
+		self.movies[mID] = {'title':info[0], 'genres':info[1]}	
 	
 	def delete_movie(self, mID):	# remove specified mID from objects movie data member
 		if mID in self.movies:

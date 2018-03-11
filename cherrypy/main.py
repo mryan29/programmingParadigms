@@ -8,7 +8,6 @@ from reset import ResetController
 
 def start_service():
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
-
     mdb = _movie_database()
     movieController = MovieController(mdb)
     userController = UserController(mdb)
@@ -16,7 +15,7 @@ def start_service():
     ratingController = RatingController(mdb)
     resetController = ResetController(mdb)
 
-    # Movies
+    # movie handlers
     dispatcher.connect('movie_get', '/movies/', controller = movieController, action = 'GET', conditions = dict(method=['GET']))
     dispatcher.connect('movie_get_key', '/movies/:key', controller = movieController, action = 'GET', conditions = dict(method=['GET']))
     dispatcher.connect('movie_put_key', '/movies/:key', controller = movieController, action = 'PUT', conditions = dict(method=['PUT']))
@@ -24,7 +23,7 @@ def start_service():
     dispatcher.connect('movie_delete', '/movies/', controller = movieController, action = 'DELETE', conditions = dict(method=['DELETE']))
     dispatcher.connect('movie_delete_key', '/movies/:key', controller = movieController, action = 'DELETE', conditions = dict(method=['DELETE']))
 
-    # Users
+    # user handlers
     dispatcher.connect('user_get', '/users/', controller = userController, action = 'GET', conditions = dict(method=['GET']))
     dispatcher.connect('user_get_key', '/users/:key', controller = userController, action = 'GET', conditions = dict(method=['GET']))
     dispatcher.connect('user_put_key', '/users/:key', controller = userController, action = 'PUT', conditions = dict(method=['PUT']))
@@ -32,27 +31,21 @@ def start_service():
     dispatcher.connect('user_delete', '/users/', controller = userController, action = 'DELETE', conditions = dict(method=['DELETE']))
     dispatcher.connect('user_delete_key', '/users/:key', controller = userController, action = 'DELETE', conditions = dict(method=['DELETE']))
 
-    # Recommendations
+    # recommendation handlers
     dispatcher.connect('recommendation_get_key', '/recommendations/:key', controller = recommendationController, action = 'GET', conditions = dict(method=['GET']))
     dispatcher.connect('recommendation_put_key', '/recommendations/:key', controller = recommendationController, action = 'PUT', conditions = dict(method=['PUT']))
     dispatcher.connect('recommendation_delete', '/recommendations/', controller = recommendationController, action = 'DELETE', conditions = dict(method=['DELETE']))
 
-    # Rating
+    # rating handler
     dispatcher.connect('rating_get_key', '/ratings/:key', controller = ratingController, action = 'GET', conditions = dict(method=['GET']))
 
-    # Reset
+    # reset handlers
     dispatcher.connect('reset_put', '/reset/', controller = resetController, action = 'PUT', conditions = dict(method=['PUT']))
     dispatcher.connect('reset_put_key', '/reset/:key', controller = resetController, action = 'PUT', conditions = dict(method=['PUT']))
 
-    config = {'global':
-                {'server.socket_host': 'ash.campus.nd.edu',
-                 'server.socket_port': 40110},
-              '/':
-                 {'request.dispatch': dispatcher}
-             }
-
-    cherrypy.config.update(config)
-    app = cherrypy.tree.mount(None, config = config)
+    cfg = {'global': {'server.socket_host': 'ash.campus.nd.edu', 'server.socket_port': 40110}, '/': {'request.dispatch': dispatcher} }
+    cherrypy.config.update(cfg)
+    app = cherrypy.tree.mount(None, config = cfg)
     cherrypy.quickstart(app)
 
 if __name__ == '__main__':
