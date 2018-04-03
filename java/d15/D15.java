@@ -1,4 +1,4 @@
-public class D14
+public class D15
 {
 	public static void main(String args[])
 	{
