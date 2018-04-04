@@ -1,10 +1,10 @@
 import edu.nd.cse.paradigms.*;
 
-public class EasyCollider extends Collider
+public class MediumCollider extends Collider
 {
 	private PEEngine engine;
-
-	public EasyCollider(PEEngine engine)
+	int red = 0xf44253;
+	public MediumCollider(PEEngine engine)
 	{
 		this.engine = engine;
 	}
@@ -18,6 +18,10 @@ public class EasyCollider extends Collider
 	public void processCollision(Enemy enemy, PEWorldObject wo)
 	{
 		if (wo instanceof Enemy)
-			engine.remove(enemy);
+			if (enemy.getLives() <= 0)
+				engine.remove(enemy);
+			else if (enemy.getLives() == 1)
+				enemy.setColor(red);
+				enemy.setLives(enemy.getLives() - 1);
 	}
 }

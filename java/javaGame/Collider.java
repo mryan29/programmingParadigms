@@ -1,3 +1,5 @@
+import edu.nd.cse.paradigms.*;
+
 public abstract class Collider
 {
 	public abstract void processCollision(PECircle circle, PEWorldObject wo);
