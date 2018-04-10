@@ -1,3 +1,5 @@
+import edu.nd.cse.paradigms.*;
+
 class MyGame extends PEGame
 {
 	private PEEngine engine;
@@ -6,6 +8,7 @@ class MyGame extends PEGame
 	{
 		engine = new PEEngine(this);
 	}
+
 }
 
 public class EngineTest
@@ -16,3 +19,4 @@ public class EngineTest
 		game.start();
 	}
 }
+
