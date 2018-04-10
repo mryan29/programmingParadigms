@@ -1,5 +1,17 @@
 import edu.nd.cse.paradigms.*;
 
+class CoolSquare extends PESquare
+{
+	private int x_rate = 1;
+	private int y_rate = 1;
+
+	public void tick()
+	{
+		this.x += this.x_rate;
+		this.y += this.y_rate;
+	}
+}
+
 class MyGame extends PEGame
 {
 	private PEEngine engine;
@@ -9,7 +21,7 @@ class MyGame extends PEGame
 	{
 		engine = new PEEngine(this);
 		
-		cs = new CoolSquare;
+		cs = new CoolSquare();
 		cs.setCenter(10, 10);
 		cs.setColor(0x000044);
 		cs.setSize(100);

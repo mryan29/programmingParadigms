@@ -24,7 +24,7 @@ public class PEEngine extends Frame
 		// your code here!
 	}
 
-/*
+
 	public void add(PEWorldObject wo)
 	{
 	}
@@ -32,7 +32,7 @@ public class PEEngine extends Frame
 	public void remove(PEWorldObject wo)
 	{
 	}
-*/	
+	
 	public void tick()
 	{
 	}
