@@ -6,8 +6,11 @@ import java.awt.Color;
 
 public class PEScreen
 {
-	private int width, height, color;
+	//private int width, height, color;
+	private int width, height;
 	private int bg;
+	private Graphics graphic;
+	private Color c;
 	private BufferedImage image;
 	private int[][] pixels;
 
@@ -15,10 +18,11 @@ public class PEScreen
 	{
 		this.width = width;
 		this.height = height;
-		this.color = color;
+		//this.color = color;
 		this.bg = 0x22CC11; // default background color is green
 		this.pixels = new int [width][height];
 		clear();
+		this.image = new BufferedImage(width, height, 1);
 	}
 
 	public void setPixel(int px, int py, int color)
@@ -47,11 +51,12 @@ public class PEScreen
 			return false;
 		}
 	}
-/*	
+	
 	public void renderWorldObject(PEWorldObject wo)
 	{
+		wo.render(this); // should call PEEngine's update i think??
 	}
-*/
+
 	public BufferedImage render()
 	{
 		// your code here

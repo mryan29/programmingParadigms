@@ -2,7 +2,10 @@ package edu.nd.cse.paradigms;
 
 abstract public class PEWorldObject 
 {
-	public int x, y, color;
+	public int x = 0;
+	public int y = 0; 
+	public int color = 0x0000ff;
+	private PEScreen screen;
 
 	public PEWorldObject()
 	{

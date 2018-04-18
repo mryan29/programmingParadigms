@@ -20,6 +20,7 @@ public class PESquare extends PEWorldObject
 	
 	public void render(PEScreen screen)
 	{
+		screen.renderWorldObject(this);
 	}
 
 }
