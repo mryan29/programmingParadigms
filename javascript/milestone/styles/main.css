@@ -1,0 +1,30 @@
+body {
+	background-color: #019DD5;
+	text-align: center;
+}
+
+img {
+	padding: 60px;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button {
+	text-size: 10px;
+	display: inline-block;
+	width: 75px;
+	height: 20px;
+	margin: 10px;
+}
+
+
+#title {
+	font-weight: bold;
+	font-size: 200%;
+}
+
+#rating {
+	font-size: 150%;
+}
+
